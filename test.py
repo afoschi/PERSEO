@@ -15,8 +15,8 @@ Run with:  python -m pytest tests/ -v
 import numpy as np
 import pytest
 
-from perseo.extended_mass.make_plummer import make_plummer
-from perseo.relativistic.make_onePN import make_onePN
+from perseo.extended_mass import make_plummer
+from perseo.relativistic import make_onePN
 from perseo.osculating_equations import integrate_orbit, element_changes
 
 # --- Physical constants (SI) -------------------------------------------------
@@ -33,7 +33,7 @@ M_BH = 4.297e6 * Msun
 
 # S2 orbit [from GRAVITY (2024)]
 
-a_S2 = 1.5472e14      # m 
+a_S2 = 1.5472e14      # m
 e_S2 = 0.8844
 i_S2 = 134.7*deg
 omega_S2 = 66.3*deg + np.pi
@@ -50,15 +50,15 @@ def plummer_enclosed_mass(r, r0, rho0):
 
     This is the closed-form integral of the Plummer density whose radial
     acceleration make_plummer returns as R = -G M(<r) / r^2. """
-    
+
     return (4.0 / 3.0) * np.pi * rho0 * r0**3 * r**3 / (r**2 + r0**2)**1.5
 
 
 def test_plummer_R_matches_enclosed_mass():
     """ The radial acceleration from make_plummer must equal -G M(<r)/r^2
     for the analytic Plummer enclosed mass, at an arbitrary point on the orbit. """
-    
-    r0 = 0.021 * pc
+
+    r0 = 0.012 * pc
     rho0 = 1.69e-10  # kg/m^3  (docstring config: S2 upper limit)
 
     plummer = make_plummer(r0, rho0)
@@ -81,7 +81,7 @@ def test_plummer_enclosed_mass_within_S2_is_upper_limit():
     """ With the docstring config (r0=0.021 pc, rho0=1.69e-10), the enclosed
     Plummer mass within the S2 orbit should sit at the ~ (1-5) 10^3 Msun upper
     limit reported for extended mass inside S2 [GRAVITY (2024)]. """
-    
+
     r0 = 0.021 * pc
     rho0 = 1.69e-10
 
