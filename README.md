@@ -15,8 +15,8 @@ Requires Python 3.9+, numpy and scipy.
 
     git clone https://github.com/afoschi/PERSEO.git
     cd PERSEO
-    pip install -r requirements.txt
-
+    pip install .       # or: pip install -e .  for an editable/development install
+ 
 ## Quick start
 
     import numpy as np
