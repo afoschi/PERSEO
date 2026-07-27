@@ -82,7 +82,7 @@ def test_plummer_enclosed_mass_within_S2_is_upper_limit():
     Plummer mass within the S2 orbit should sit at the ~ (1-5) 10^3 Msun upper
     limit reported for extended mass inside S2 [GRAVITY (2024)]. """
 
-    r0 = 0.021 * pc
+    r0 = 0.012 * pc
     rho0 = 1.69e-10
 
     r_apo = a_S2 * (1 + e_S2)   # apoapsis radius
@@ -118,6 +118,7 @@ def test_onePN_integrated_advance_matches_analytic():
     elements0 = (p_S2, e_S2, i_S2, omega_S2, Omega_S2)
     f, y = integrate_orbit(elements0, perturbations, M_BH)
 
-    dw = element_changes(f, y, elements0, angle_units='rad')[3]
+    d = element_changes(f, y, elements0, angle_units='rad')
+    dw = d["omega"][-1]
     assert np.isclose(dw, onePN_precession_analytic(M_BH, p_S2),
                           rtol=1e-2)
