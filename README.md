@@ -24,14 +24,14 @@ Requires Python 3.9+, numpy and scipy.
     from perseo.constants import Msun, degree_to_rad
 
     M = 4.29e6*Msun              # Sgr A* mass [kg]
-    a = 1.5e14                   # semi-major axis [m]
+    a = 1.5e14                   # Semi-major axis [m]
     e = 0.88
     p = a*(1-e**2) 
     iORB = 134.7*degree_to_rad
     omega = 66.3*degree_to_rad + np.pi
-    Omega = 228.2*degree_to_rad + np.pi #note the shift by a factor pi as explained in Foschi et al. (2026)
+    Omega = 228.2*degree_to_rad + np.pi   # Note the shift by pi from GRAVITY Collaboration papers values as explained in Foschi et al. (2026)
 
-    elements0 = (p, e, iORB, omega, Omega)   # p, e, i, omega, Omega
+    elements0 = (p, e, iORB, omega, Omega)   # Initial orbital elements
     
     perturbations = [make_onePN(M)]
     f, y = integrate_orbit(elements0, perturbations, M)
@@ -81,10 +81,6 @@ returns the three acceleration components:
         return my_model
 
 No changes elsewhere are needed.
-
-## Tests
-
-    python -m pytest tests/
 
 ## Citation
 
