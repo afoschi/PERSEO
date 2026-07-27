@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "perseo"
+version = "0.1.0"
+description = "Osculating orbital elements under perturbing potentials at the Galactic Center"
+authors = [{name = "Arianna Foschi"}]
+requires-python = ">=3.9"
+dependencies = ["numpy", "scipy"]
